@@ -1,0 +1,61 @@
+import pyautogui as pg
+import subprocess
+import time
+import random
+import base64
+from cryptography.fernet import Fernet
+
+# Encryption Key
+key = Fernet.generate_key()
+cipher = Fernet(key)
+
+# Encrypt Function
+def e(t):
+    return cipher.encrypt(t.encode()).decode()
+
+# Decrypt Function
+def d(et):
+    return cipher.decrypt(et.encode()).decode()
+
+# Encrypted Data (Financial-like)
+data_entries = [
+    e("Q1 Revenue Forecast"),
+    e("Expense Report Review"),
+    e("Market Share Analysis"),
+    e("Projected Growth 2025"),
+    e("Financial Risk Factors"),
+    e("Investment Strategy"),
+]
+
+# Open Encrypted Programs
+p = [
+    e("111111"),  # Placeholder for application 1
+    e("222222"),  # Placeholder for application 2
+    e("333333"),  # Placeholder for application 3
+    e("444444"),  # Placeholder for application 4
+    e("555555"),  # Placeholder for application 5
+]
+
+# Open Programs Without Names
+for item in p:
+    subprocess.Popen(d(item))  # Decrypt and execute
+    time.sleep(random.uniform(2, 4))
+
+# Typing Encrypted Text
+time.sleep(5)
+for item in data_entries:
+    pg.typewrite(d(item) + "\n", interval=random.uniform(0.1, 0.3))
+    time.sleep(random.uniform(1, 3))
+
+# Move in Random Patterns
+for _ in range(10):
+    x, y = random.randint(100, 1500), random.randint(100, 800)
+    pg.moveTo(x, y, duration=random.uniform(1, 2))
+    time.sleep(random.uniform(3, 4))
+
+# Screen Change Obfuscated
+for _ in range(5):
+    pg.hotkey(*[chr(ord(c) - 1) for c in "bmv!v"][:-1])  # Encrypted shortcut
+    time.sleep(random.uniform(2, 5))
+
+print("Process Completed.")
